@@ -265,6 +265,7 @@ api_idnode_save
       goto exit;
     if (!(in = idnode_find(uuid, NULL)))
       goto exit;
+    tvhlog(LOG_NOTICE, "api_idnode", "triggered single idnode_update: %s", uuid);
     idnode_update(in, msg);
     err = 0;
 
@@ -278,6 +279,7 @@ api_idnode_save
       if (!(in = idnode_find(uuid, NULL)))
         continue;
       idnode_update(in, conf);
+      tvhlog(LOG_NOTICE, "api_idnode", "triggered multiple idnode_update: %s", uuid);
     }
     err = 0;
   }

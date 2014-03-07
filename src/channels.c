@@ -602,6 +602,7 @@ channel_save ( channel_t *ch )
 {
   htsmsg_t *c = htsmsg_create_map();
   idnode_save(&ch->ch_id, c);
+  tvhlog(LOG_NOTICE, "channels", "AB: Saving channel - %s", idnode_uuid_as_str(&ch->ch_id));
   hts_settings_save(c, "channel/%s", idnode_uuid_as_str(&ch->ch_id));
   htsmsg_destroy(c);
 }

@@ -736,11 +736,14 @@ idnode_write0 ( idnode_t *self, htsmsg_t *c, int optmask, int dosave )
 {
   int save = 0;
   const idclass_t *idc = self->in_class;
+  tvhlog(LOG_DEBUG, "idnode", "idnode_write0 triggered");
   save = idnode_class_write_values(self, idc, c, optmask);
   if (save && dosave)
     idnode_savefn(self);
+    tvhlog(LOG_NOTICE, "api_idnode", "idnode_write0 save is valid");
   if (dosave)
     idnode_notify(self, NULL, 0, 0);
+    tvhlog(LOG_NOTICE, "api_idnode", "idnode_write0 just a notify");
   // Note: always output event if "dosave", reason is that UI updates on
   //       these, but there are some subtle cases where it will expect
   //       an update and not get one. This include fields being set for
